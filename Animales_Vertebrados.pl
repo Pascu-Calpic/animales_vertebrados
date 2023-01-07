@@ -164,39 +164,6 @@ clasificacion3(reptiles(tortugas,caracteristicas(oviparos,respiran_por_los_pulmo
 poseen2(anfibios,caracteristicas(no_tienen_cola,oviparos,respiran_por_los_pulmones_o_branquias,sangre_fria,insectivoros)).
 
 %LISTAS
-los_animales_vertebrados(vertebrados,[mamiferos, aves,peces,reptiles,anfibios]).
-los_animales_vertebrados2(mamiferos,[herbivoros, carnivoros,murcielagos,cetaceos,roedores,marsupiales]).
-los_animales_vertebrados3(reptiles,[lagartos,serpientes,tortugas]).
-los_animales_mamiferos(herbivoros,[ovejas,cabras,alces,ciervos,camellos]).
-los_animales_mamiferos2(carnivoros,[lobos,leones,mapaches,zorros,perros]).
-los_animales_mamiferos3(murcielagos,[murcielagos_blanco,murcielagos_pata_peluda,murcielagos_lengueton,murcielagos_trompudo]).
-los_animales_mamiferos4(cetaceos,[ballenas,delfines,orcas,cachalotes]).
-los_animales_mamiferos5(roedores,[ratas,ardillas,castores,capibaras]).
-los_animales_mamiferos6(marsupiales,[canguros,koala,numbat]).
-las_aves(aves,[avestruz,kiwis,gallinas,patos,gaviotas]).
-los_peces(peces,[pez_globo,pez_loro,pez_payaso,pez_martillo,sardina]).
-los_animales_vertebrados4(reptiles,[lagartos,serpientes,tortugas]).
-los_reptiles(lagartos,[camaleon,gorgona,anolis,caiman,cocodrilo]).
-los_reptiles2(serpientes,[cobra,mamba_negra,cascabel,piton]).
-los_reptiles3(tortugas,[tortuga_laud,tortuga_verde,tortuga_carey,tortuga_bastarda]).
-los_anfibios4(anfibios,[ranas,sapos,triton,salamandras,gallipato]).
-%adicionar
-adicionar(X,L,[X|L]).
-%eliminar
-eliminar(X, [X|Cola],Cola).
-%alternar
-eliminar(X,[ Y |Cola],[ Y |Cola1]):-eliminar(X,Cola,Cola1).
-
-%RECURSIVIDAD 
-animalesvertebrados(0,0). 
-animalesvertebrados(1,1). 
-animalesvertebrados(N,Y):- N>1,N1 is N-1,animalesvertebrados(N1,Y1),N2 is N-2,animalesvertebrados(N2,Y2),Y is Y1+Y2. 
-
-vertebrados(_, _, 0). 
-vertebrados(A, B, N):-write(A),write(' '),N1 is N-1,C is A+B,vertebrados(B, C, N1). 
-
-%CONCATENACION.
-
 herbivoros([ovejas,cabras,alces,ciervos,camellos]).
 carnivoros([lobos,leones,mapaches,zorros,perros]).
 murcielagos([murcielagos_blanco,murcielagos_pata_peluda,murcielagos_lengueton,murcielagos_trompudo]).
@@ -209,6 +176,43 @@ lagartos([camaleon,gorgona,anolis,caiman,cocodrilo]).
 serpientes([cobra,mamba_negra,cascabel,piton]).
 tortugas([tortuga_laud,tortuga_verde,tortuga_carey,tortuga_bastarda]).
 anfibios([ranas,sapos,triton,salamandras,gallipato]).
+
+%adicionar
+adicionar(X,L,[X|L]).
+%eliminar
+eliminar(X, [X|Cola],Cola).
+%alternar
+eliminar(X,[ Y |Cola],[ Y |Cola1]):-eliminar(X,Cola,Cola1).
+
+%RECURSIVIDAD 
+masgrande( ballenas, cachalote).
+masgrande( cachalote, orcas).
+masgrande( orcas, alces).
+masgrande( alces, camellos).
+masgrande( camellos, leones).
+masgrande( leones, lobos).
+masgrande( lobos, delfines).
+masgrande( delfines, ovejas).
+masgrande( ovejas, ciervos).
+masgrande( ciervos, cabras).
+masgrande( camellos, ovejas).
+masgrande( ovejas,perros).
+masgrande( perros,capibaras ).
+masgrande( capibaras,zorros ).
+masgrande(zorros ,mapaches ).
+masgrande(mapaches, castores).
+masgrande(castores, ardillas).
+masgrande(ardillas,murcielagos_blanco).
+masgrande(murcielagos_blanco,murcielagos_pata_peluda).
+masgrande(murcielagos_pata_peluda,murcielagos_lengueton).
+masgrande(murcielagos_lengueton,murcielagos_trompudos).
+masgrande(murcielagos_lengueton,ratas).
+
+muchomasgrande(A,B) :- masgrande(A,B).
+muchomasgrande(A,B) :- masgrande(A,X),muchomasgrande(X,B).
+
+
+%CONCATENACION.
 
 %formar parejas
 concatenar_animales(X,P) :-
